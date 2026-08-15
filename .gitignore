@@ -1,0 +1,15 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Java / Gradle
+.gradle/
+build/
+out/
+
+# Environment
+.env
+.env.*
