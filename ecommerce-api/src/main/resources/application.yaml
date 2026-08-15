@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: learn-spring-api
+    name: ecommerce-api
   profiles:
     active: dev
   datasource:

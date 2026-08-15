@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.tochratana'
 version = '0.0.1-SNAPSHOT'
-description = 'Demo project for Spring Boot'
+description = 'Ecommerce API'
 
 java {
 	toolchain {
