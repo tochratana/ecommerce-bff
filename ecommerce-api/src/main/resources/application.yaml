@@ -1,0 +1,52 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: learn-spring-api
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: tochratana
+    password: 1234
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.luxe-kh.online/realms/learn-spring
+          # Supplying the JWK URI lets the app start before Keycloak is available.
+          jwk-set-uri: https://keycloak.luxe-kh.online/realms/learn-spring/protocol/openid-connect/certs
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+file-upload:
+  client-path: /files
+  server-path: ./uploads/
+  base-uri: ${FILE_UPLOAD_BASE_URI:http://localhost:${server.port}${file-upload.client-path}}
+
+keycloak:
+  server-url: https://keycloak.luxe-kh.online
+  realm: learn-spring
+  # Confidential client with service accounts enabled for user administration.
+  client-id: learn-spring-api
+  # Copy this value from Clients > learn-spring-api > Credentials.
+  client-secret: l0NGEuMKsV79D31mEs3QrRo30TGHmmgl
+  openid-configuration-url: https://keycloak.luxe-kh.online/realms/learn-spring/.well-known/openid-configuration
+
+springdoc:
+  swagger-ui:
+    oauth:
+      # Use a separate public Keycloak client for Swagger UI authorization.
+      client-id: learn-spring-swagger
+      use-pkce-with-authorization-code-grant: true

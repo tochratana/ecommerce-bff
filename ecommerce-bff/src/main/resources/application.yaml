@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: ecommerce-bff
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: ecommerce-ui
+              uri: http://localhost:3000
+              predicates:
+                - Path=/**
+            - id: ecommerce-api
+              uri: http://localhost:9090
+              predicates:
+                - Path=/ecommerce-api/**
+              filters:
+                - RewritePath=/ecommerce-api/?(?<segment>.*), /$\{segment}
+server:
+  port: 9092

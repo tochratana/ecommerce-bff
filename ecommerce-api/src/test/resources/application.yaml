@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:learn_spring;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/learn-spring
+          jwk-set-uri: http://localhost:8080/realms/learn-spring/protocol/openid-connect/certs
+
+keycloak:
+  server-url: http://localhost:8080
+  realm: learn-spring
+  client-id: learn-spring-api
+  client-secret: test-client-secret
+  openid-configuration-url: http://localhost:8080/realms/learn-spring/.well-known/openid-configuration
+
+file-upload:
+  client-path: /files
+  server-path: ./build/test-uploads/
+  base-uri: http://localhost:9090/files
