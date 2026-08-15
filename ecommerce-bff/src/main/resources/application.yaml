@@ -6,15 +6,15 @@ spring:
       server:
         webflux:
           routes:
+            - id: ecommerce-api # Rewrite part for route
+              uri: http://localhost:9090
+              predicates:
+                - Path=/ecommerce-api/** # call from this part for frontend
+              filters:
+                - RewritePath=/ecommerce-api/?(?<segment>.*), /$\{segment}
             - id: ecommerce-ui
               uri: http://localhost:3000
               predicates:
                 - Path=/**
-            - id: ecommerce-api
-              uri: http://localhost:9090
-              predicates:
-                - Path=/ecommerce-api/**
-              filters:
-                - RewritePath=/ecommerce-api/?(?<segment>.*), /$\{segment}
 server:
   port: 9092
